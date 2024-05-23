@@ -20,7 +20,7 @@ def distancia_euclideana(xi, xj, sigma):
     Devuelve:
         distancia euclideana entre xi y xj
     """
-    return np.exp(-(np.linalg.norm(xi-xj))**2/(2*(sigma**2)))
+    return np.exp(-((np.linalg.norm(xi-xj))**2)/(2*(sigma**2)))
 
 def matriz_de_similitud(X, sigma):
     """
@@ -38,15 +38,17 @@ def matriz_de_similitud(X, sigma):
             W[i, j] = distancia_euclideana(X[i], X[j], sigma)
     return W
 
+#TODO descomentar
 # Calculamos la matriz de similitud de X
-# W = matriz_de_similitud(X, 1)
+W = matriz_de_similitud(X, 10)
 
-#graficamos la matriz diagonal S commo una matriz
+# Graficamos la matriz de similitud de X
 plt.figure()
-plt.imshow(np.diag(S))
+plt.imshow(W)
 plt.colorbar()
-plt.title('Matriz diagonal S')
+plt.title('Matriz de similitud de X')
 plt.show()
+
 
 
 #Queremos calcular X_k, con U_k, S_k y Vt_k y su matriz de similitud
@@ -83,14 +85,53 @@ def calcular_X_k(U, S, Vt, k):
     return U_k, S_k, Vt_k
 
 #calculamos X_k con k=2
-#Graficar S
-plt.figure()
-plt.plot(S)
-plt.title('Valores singulares')
-plt.show()
+U_2, S_2, Vt_2 = calcular_X_k(U, S, Vt, 2)
 
-print(S)
-print(calcular_valores_singulares(S, 3))
+#TODO descomentar
+# #buscamos X_2
+# X_2 = np.dot(U_2, np.dot(np.diag(S_2), Vt_2))
+
+# #calculamos la matriz de similitud de X_2
+# W_2 = matriz_de_similitud(X_2, 10)
+
+# #graficamos la matriz de similitud de X_2
+# plt.figure()
+# plt.imshow(W_2)
+# plt.colorbar()
+# plt.title('Matriz de similitud de X_2')
+# plt.show()
+
+#calculamos X_k con k=6
+U_6, S_6, Vt_6 = calcular_X_k(U, S, Vt, 6)
+
+#TODO descomentar
+# #calculamos X_6
+# X_6 = np.dot(U_6, np.dot(np.diag(S_6), Vt_6))
+
+# #calculamos la matriz de similitud de X_6
+# W_6 = matriz_de_similitud(X_6, 100)
+
+# #graficamos la matriz de similitud de X_6
+# plt.figure()
+# plt.imshow(W_6)
+# plt.colorbar()
+# plt.title('Matriz de similitud de X_6')
+# plt.show()
+
+#calculamos X_k con k=10
+U_10, S_10, Vt_10 = calcular_X_k(U, S, Vt, 10)
+
+#TODO descomentar
+# # #calculamos X_10
+# X_10 = np.dot(U_10, np.dot(np.diag(S_10), Vt_10))
 
 
+# #calculamos la matriz de similitud de X_10
+# W_10 = matriz_de_similitud(X_10, 100)
 
+# #graficamos la matriz de similitud de X_10
+# plt.figure()
+# plt.imshow(W_10)
+# plt.colorbar()
+# plt.title('Matriz de similitud de X_10')
+# plt.show()
