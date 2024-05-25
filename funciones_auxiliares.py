@@ -126,5 +126,6 @@ def PCA(X, k):
     U_k, S_k, Vt_k = calcular_X_k(U, S, Vt, k)
     # resultadi final deberia ser X_norm * V_k
     Z = np.dot(X_norm, Vt_k.T)
+
     return Z
 

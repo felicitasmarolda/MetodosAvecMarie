@@ -33,7 +33,7 @@ W = fa.matriz_de_similitud(X, 10)
 U_2, S_2, Vt_2 = fa.calcular_X_k(U, S, Vt, 2)
 
 # #buscamos X_2
-# X_2 = np.dot(U_2, np.dot(np.diag(S_2), Vt_2))
+X_2 = np.dot(U_2, np.dot(np.diag(S_2), Vt_2))
 
 # #calculamos la matriz de similitud de X_2
 # W_2 = matriz_de_similitud(X_2, 10)
@@ -81,18 +81,22 @@ U_10, S_10, Vt_10 = fa.calcular_X_k(U, S, Vt, 10)
 # plt.show()
 
 #HACEMOS PCA
-#calculamos la matriz de covarianza de X
-C = fa.matriz_de_covarianza(X)
+#TODO descomentar
+# #calculamos los componentes principales de X
+# Z = fa.PCA(X, 2)
 
-#calculamos los componentes principales de X
-Z = fa.PCA(X, 2)
+# calculamos los componentes principales de X_2
+Z_2 = fa.PCA(X_2, 2)
 
-#graficamos los componentes principales de X
+#Graficamos los componentes principales de X_2
+# plt.figure()
+# plt.scatter(Z_2[:, 0], Z_2[:, 1])
+# plt.title('Componentes principales de X_2')
+# plt.show()
+
+#graficar la matriz Z
 plt.figure()
-plt.scatter(Z[:, 0], Z[:, 1])
-plt.xlabel('Componente principal 1')
-plt.ylabel('Componente principal 2')
-plt.title('Componentes principales de X')
+plt.imshow(Z_2)
+plt.colorbar()
+plt.title('Matriz Z_2')
 plt.show()
-
-
