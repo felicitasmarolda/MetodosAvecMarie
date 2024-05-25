@@ -14,7 +14,7 @@ U, S, Vt = np.linalg.svd(X)
 
 #TODO descomentar
 # Calculamos la matriz de similitud de X
-W = fa.matriz_de_similitud(X, 10)
+# W = fa.matriz_de_similitud(X, 10)
 
 # Graficamos la matriz de similitud de X
 # plt.figure()
@@ -30,10 +30,10 @@ W = fa.matriz_de_similitud(X, 10)
 
 #TODO descomentar
 #calculamos X_k con k=2
-U_2, S_2, Vt_2 = fa.calcular_X_k(U, S, Vt, 2)
+#U_2, S_2, Vt_2 = fa.calcular_X_k(U, S, Vt, 2)
 
 # #buscamos X_2
-X_2 = np.dot(U_2, np.dot(np.diag(S_2), Vt_2))
+#X_2 = np.dot(U_2, np.dot(np.diag(S_2), Vt_2))
 
 # #calculamos la matriz de similitud de X_2
 # W_2 = matriz_de_similitud(X_2, 10)
@@ -46,10 +46,10 @@ X_2 = np.dot(U_2, np.dot(np.diag(S_2), Vt_2))
 # plt.show()
 
 #calculamos X_k con k=6
-U_6, S_6, Vt_6 = fa.calcular_X_k(U, S, Vt, 6)
+# U_6, S_6, Vt_6 = fa.calcular_X_k(U, S, Vt, 6)
 
 #TODO descomentar
-# #calculamos X_6
+#calculamos X_6
 # X_6 = np.dot(U_6, np.dot(np.diag(S_6), Vt_6))
 
 # #calculamos la matriz de similitud de X_6
@@ -65,9 +65,9 @@ U_6, S_6, Vt_6 = fa.calcular_X_k(U, S, Vt, 6)
 #calculamos X_k con k=10
 U_10, S_10, Vt_10 = fa.calcular_X_k(U, S, Vt, 10)
 
-#TODO descomentar
-# # #calculamos X_10
-# X_10 = np.dot(U_10, np.dot(np.diag(S_10), Vt_10))
+#TODO descomentar 
+#calculamos X_10
+X_10 = np.dot(U_10, np.dot(np.diag(S_10), Vt_10))
 
 
 # #calculamos la matriz de similitud de X_10
@@ -83,10 +83,11 @@ U_10, S_10, Vt_10 = fa.calcular_X_k(U, S, Vt, 10)
 #HACEMOS PCA
 #TODO descomentar
 # #calculamos los componentes principales de X
-# Z = fa.PCA(X, 2)
+# m, n = X.shape
+# Z = fa.PCA(X, n)
 
-# calculamos los componentes principales de X_2
-Z_2 = fa.PCA(X_2, 2)
+# # calculamos los componentes principales de X_2
+# Z_2 = fa.PCA(X_2, 2)
 
 #Graficamos los componentes principales de X_2
 # plt.figure()
@@ -94,9 +95,28 @@ Z_2 = fa.PCA(X_2, 2)
 # plt.title('Componentes principales de X_2')
 # plt.show()
 
-#graficar la matriz Z
+# #graficar la matriz Z
+# plt.figure()
+# plt.imshow(Z_2, aspect='auto')
+# plt.colorbar()
+# plt.title('Matriz Z_2')
+# plt.show()
+
+
+# #Calculo Z_6 los componentes principales de X_6
+# Z_6 = fa.PCA(X_6, 6)
+# # Graficamos la matriz Z_6
+# plt.figure()
+# plt.imshow(Z_6, aspect='auto')
+# plt.colorbar()
+# plt.title('Matriz Z_6')
+# plt.show()
+
+#Calculo Z_10 los componentes principales de X_10
+Z_10 = fa.PCA(X, 10)
+# Graficamos la matriz Z_10
 plt.figure()
-plt.imshow(Z_2)
-plt.colorbar()
-plt.title('Matriz Z_2')
+plt.imshow(Z_10, aspect='auto')
+plt.colorbar()  
+plt.title('Matriz Z_10')
 plt.show()

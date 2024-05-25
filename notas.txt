@@ -4,4 +4,9 @@
 
  - cuanto mas grande d ==> mas distintos los elementos (creemos que es porque cuanto mas grande hay mas dimensiones ==> la matriz es mas específica pero no es bueno eso nose xq)
 
- - 
+ - PCA proyecta tus datos en un nuevo espacio de características, donde las primeras componentes principales capturan la mayor parte de la variabilidad en tus datos. Las componentes principales subsiguientes capturan cada vez menos variabilidad.
+
+Por lo tanto, si proyectas tus datos en un espacio de mayor dimensión (es decir, eliges más componentes principales), es probable que veas más valores cercanos a cero en tu matriz. Esto se debe a que las componentes principales adicionales están capturando menos variabilidad en los datos, y por lo tanto, sus valores son más pequeños.
+
+Esto es útil para la reducción de la dimensionalidad, ya que puedes elegir mantener solo las primeras componentes principales (las que capturan la mayor parte de la variabilidad en tus datos) y descartar las restantes (las que tienen principalmente valores cercanos a cero).
+
