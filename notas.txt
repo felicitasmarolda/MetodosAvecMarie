@@ -1,0 +1,7 @@
+
+ - mas grande sigma ==> en la matriz de similaridad la diagonal principal es mas grande
+    - mas grande sigma ==> en la matriz de similaridad los valores fuera de la diagonal principal son mas pequeños
+
+ - cuanto mas grande d ==> mas distintos los elementos (creemos que es porque cuanto mas grande hay mas dimensiones ==> la matriz es mas específica pero no es bueno eso nose xq)
+
+ - 

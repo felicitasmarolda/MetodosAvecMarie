@@ -43,11 +43,11 @@ def matriz_de_similitud(X, sigma):
 W = matriz_de_similitud(X, 10)
 
 # Graficamos la matriz de similitud de X
-plt.figure()
-plt.imshow(W)
-plt.colorbar()
-plt.title('Matriz de similitud de X')
-plt.show()
+# plt.figure()
+# plt.imshow(W)
+# plt.colorbar()
+# plt.title('Matriz de similitud de X')
+# plt.show()
 
 
 
@@ -135,3 +135,4 @@ U_10, S_10, Vt_10 = calcular_X_k(U, S, Vt, 10)
 # plt.colorbar()
 # plt.title('Matriz de similitud de X_10')
 # plt.show()
+
