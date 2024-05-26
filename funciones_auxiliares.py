@@ -1,6 +1,8 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+from PIL import Image
 
 def distancia_euclideana(xi, xj, sigma):
     """"
@@ -129,3 +131,13 @@ def PCA(X, k):
 
     return Z
 
+#_____________________________________________________________________________________-
+#Ejercicio 2
+def cargar_y_transformar_imagen(ruta, p):
+    if not os.path.isfile(ruta):
+            print(f"El archivo {ruta} no se encuentra en el directorio especificado.")
+            return None
+    img = Image.open(ruta)
+    img_array = np.array(img)
+    img_vector = img_array.flatten()
+    return img_vector
