@@ -10,3 +10,26 @@ Por lo tanto, si proyectas tus datos en un espacio de mayor dimensión (es decir
 
 Esto es útil para la reducción de la dimensionalidad, ya que puedes elegir mantener solo las primeras componentes principales (las que capturan la mayor parte de la variabilidad en tus datos) y descartar las restantes (las que tienen principalmente valores cercanos a cero).
 
+ - esto no es tan seguro pero puede ser útil --> La razón por la cual no observas una diferencia significativa en los valores de 
+𝑘
+k más allá de 21 puede estar relacionada con la naturaleza de los datos y la descomposición en valores singulares (SVD). Aquí hay algunas razones por las que esto puede suceder:
+
+Rango Efectivo de la Matriz 
+𝑋
+X:
+La matriz 
+𝑋
+X tiene un rango que determina el número de valores singulares no nulos. Si el rango de 
+𝑋
+X es menor o igual a 21, entonces los valores singulares a partir de esa posición serán cero o casi cero, lo que significa que no aportan nueva información significativa. En otras palabras, más allá de cierto punto, los componentes adicionales no contribuyen a reducir el error de reconstrucción.
+
+Varianza Explicada:
+Los primeros componentes principales capturan la mayor parte de la varianza en los datos. Una vez que se ha capturado la mayor parte de la varianza significativa, los componentes adicionales contribuyen muy poco a la mejora de la reconstrucción. Por lo tanto, la diferencia entre las imágenes originales y las reconstruidas se estabiliza.
+
+Redundancia en los Datos:
+Las imágenes pueden contener información redundante, y una vez que los componentes principales han capturado las características esenciales, agregar más componentes no mejora significativamente la reconstrucción.
+
+Para verificar esto, puedes calcular la varianza explicada acumulada y observar cómo cambia a medida que aumenta 
+𝑘
+k. Si la varianza explicada se estabiliza después de cierto punto, es una indicación de que los componentes adicionales no están aportando nueva información.
+
