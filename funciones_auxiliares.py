@@ -131,6 +131,16 @@ def PCA(X, k):
 
     return Z
 
+def error_de_aproximacion(X_modificada,X_original):
+    """
+    Calcula el error de aproximación entre X_modificada y X_original
+    Recibe:
+        X_modificada: matriz de datos de dimensión m x n
+        X_original: matriz de datos de dimensión m x n
+    Devuelve:
+        error: error de aproximación entre X_modificada y X_original
+    """
+    return np.linalg.norm(X_modificada - X_original)
 #_____________________________________________________________________________________-
 #Ejercicio 2
 def cargar_y_transformar_imagen(ruta, p):
@@ -141,3 +151,18 @@ def cargar_y_transformar_imagen(ruta, p):
     img_array = np.array(img)
     img_vector = img_array.flatten()
     return img_vector
+
+def similaridad_entre_pares_de_imagenes(X):
+    #hacer svd
+    U, S, Vt = np.linalg.svd(X, full_matrices=False)
+    #valores de k
+    k_values = np.arange(1, 30)
+    #inicializamos la matriz de similaridad
+    matriz_similaridad = np.zeros((X.shape[0], X.shape[0], len(k_values)))
+    #inicializamos la matriz de similaridad
+    for i, k in enumerate(k_values):
+        U_k, S_k, Vt_k = calcular_X_k(U, S, Vt, k)
+        X_k = np.dot(U_k, np.dot(np.diag(S_k), Vt_k))
+        #calcular la matriz de similaridad
+        matriz_similaridad[:, :, i] = matriz_de_similitud(X_k, 10)
+    return matriz_similaridad

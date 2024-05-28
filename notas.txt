@@ -9,7 +9,8 @@
 Por lo tanto, si proyectas tus datos en un espacio de mayor dimensión (es decir, eliges más componentes principales), es probable que veas más valores cercanos a cero en tu matriz. Esto se debe a que las componentes principales adicionales están capturando menos variabilidad en los datos, y por lo tanto, sus valores son más pequeños.
 
 Esto es útil para la reducción de la dimensionalidad, ya que puedes elegir mantener solo las primeras componentes principales (las que capturan la mayor parte de la variabilidad en tus datos) y descartar las restantes (las que tienen principalmente valores cercanos a cero).
-
+    -  al quedarse con pocas dimensiones (dónde las variables si son relevantes y uno elimina le ruido) se observan clusters.
+      -  al quedarse con muchas dimensiones (dónde las variables no son relevantes y uno no elimina le ruido) se observan clusters. 
  - esto no es tan seguro pero puede ser útil --> La razón por la cual no observas una diferencia significativa en los valores de 
 𝑘
 k más allá de 21 puede estar relacionada con la naturaleza de los datos y la descomposición en valores singulares (SVD). Aquí hay algunas razones por las que esto puede suceder:
