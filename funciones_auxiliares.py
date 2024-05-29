@@ -153,6 +153,7 @@ def cargar_y_transformar_imagen(ruta, p):
     return img_vector
 
 def similaridad_entre_pares_de_imagenes(X):
+    """"""
     #hacer svd
     U, S, Vt = np.linalg.svd(X, full_matrices=False)
     #valores de k
@@ -166,3 +167,29 @@ def similaridad_entre_pares_de_imagenes(X):
         #calcular la matriz de similaridad
         matriz_similaridad[:, :, i] = matriz_de_similitud(X_k, 10)
     return matriz_similaridad
+
+
+def compresion(X, k):
+    """
+    Comprime una matriz X a k componentes utilizando SVD.
+
+    Parámetros:
+    X -- matriz de entrada
+    k -- número de componentes a mantener
+
+    Retorna:
+    X_k -- matriz comprimida
+    """
+    
+    # Calcular la descomposición de valores singulares de X
+    U, S, Vt = np.linalg.svd(X, full_matrices=False)
+
+    # Mantener solo las primeras k componentes
+    U_k = U[:, :k]
+    S_k = np.diag(S[:k])  # Convertir S_k en una matriz diagonal
+    Vt_k = Vt[:k, :]
+
+    # Calcular la matriz comprimida
+    X_k = np.dot(U_k, np.dot(S_k, Vt_k))
+
+    return X_k
