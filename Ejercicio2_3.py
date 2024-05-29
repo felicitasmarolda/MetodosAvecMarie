@@ -13,16 +13,17 @@ matriz de similaridad para visualizar todas las similaridades par-a-par juntas."
 
 #importamos la matriz de imagenes del ejercicio 2_1
 from Ejercicio2_1 import X
-from Ejercicio2_1 import mat_simil_x
 
 #calculamos 3 X_k
 X_10 = fa.compresion(X,10)
 X_5 = fa.compresion(X,5)
 X_1 = fa.compresion(X,1)
 
-mat_simil_10 = fa.matriz_de_similitud(X_10,1000) 
-mat_simil_5 = fa.matriz_de_similitud(X_5,1000) 
-mat_simil_1 = fa.matriz_de_similitud(X_1,1000) 
+sigma = 500
+max_simil_X = fa.matriz_de_similitud(X,sigma)
+mat_simil_10 = fa.matriz_de_similitud(X_10,sigma) 
+mat_simil_5 = fa.matriz_de_similitud(X_5,sigma) 
+mat_simil_1 = fa.matriz_de_similitud(X_1,sigma) 
 
 fig, axes = plt.subplots(1, 4, figsize=(20, 6))
 im1 = axes[0].imshow(mat_simil_10, cmap='viridis')
@@ -45,7 +46,7 @@ axes[2].set_xlabel('Índice')
 axes[2].set_ylabel('Índice')
 fig.colorbar(im3, ax=axes[2])
 
-im4 = axes[3].imshow(mat_simil_x,cmap='viridis')
+im4 = axes[3].imshow(max_simil_X,cmap='viridis')
 axes[3].set_title('Matriz de Similitud X')
 axes[3].set_xlabel('Índice')
 axes[3].set_ylabel('Índice')

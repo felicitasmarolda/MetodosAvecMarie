@@ -32,7 +32,7 @@ plt.suptitle('Imágenes originales')
 plt.show()
 
 #matriz de similaridad de x
-mat_simil_x = fa.matriz_de_similitud(X,1000)
+# mat_simil_x = fa.matriz_de_similitud(X,1000)
 
 #2. Calcular la matriz de similitud W de las imágenes utilizando la función matriz_de_similitud de funciones_auxiliares.py.
 

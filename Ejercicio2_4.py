@@ -11,3 +11,4 @@ cada imagen comprimida y su original no exceda el 10% bajo la norma de Frobenius
 ultima representación aprendida con el dataset 2 ¿Qué error de reconstrucción obtienen si utilizan la
 misma compresión (con la misma base de d dimensiones obtenida del dataset 2) para las imagenes
 dataset_imagenes1.zip?"""
+
