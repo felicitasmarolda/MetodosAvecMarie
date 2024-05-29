@@ -31,10 +31,13 @@ for i in range(18):
 plt.suptitle('Imágenes originales')
 plt.show()
 
+#matriz de similaridad de x
+mat_simil_x = fa.matriz_de_similitud(X,1000)
+
 #2. Calcular la matriz de similitud W de las imágenes utilizando la función matriz_de_similitud de funciones_auxiliares.py.
 
 #3 bajar la dimensionalidad a X
-k = 10
+k = 5
 #calculemos el nuevo X_k
 X_k = fa.compresion(X,k)
 #graficar
@@ -46,21 +49,42 @@ for i in range(18):
 plt.suptitle('Imágenes reconstruidas')
 plt.show()
 
-#graficar esta diferencia para distintos valores de k
-k_values = np.arange(1, 30)
-diferencias = np.zeros(k_values.shape)
-for i, k in enumerate(k_values):
-    X_k = fa.compresion(X, k)
-    diferencias[i] = np.linalg.norm(X-X_k)
-plt.figure()
-plt.plot(k_values, diferencias, color='hotpink')
-plt.xlabel('k')
-plt.ylabel('Diferencia')
-plt.title('Diferencia entre las imágenes originales y las reconstruidas')
-plt.grid()
-plt.show()
+#matriz de similaridad de X_k
+mat_simil_X_k = fa.matriz_de_similitud(X_k,1000)
+
+#Graficar
+
+# plt.figure()
+# plt.imshow(mat_simil_x, cmap='viridis')
+# plt.colorbar()
+# plt.title('Matriz de Similitud')
+# plt.xlabel('Índice')
+# plt.ylabel('Índice')
+# plt.show()
+
+# plt.figure()
+# plt.imshow(mat_simil_X_k, cmap='viridis')
+# plt.colorbar()
+# plt.title('Matriz de Similitud')
+# plt.xlabel('Índice')
+# plt.ylabel('Índice')
+# plt.show()
+
+# #graficar esta diferencia para distintos valores de k
+# k_values = np.arange(1, 30)
+# diferencias = np.zeros(k_values.shape)
+# for i, k in enumerate(k_values):
+#     X_k = fa.compresion(X, k)
+#     diferencias[i] = np.linalg.norm(X-X_k)
+# plt.figure()
+# plt.plot(k_values, diferencias, color='hotpink')
+# plt.xlabel('k')
+# plt.ylabel('Diferencia')
+# plt.title('Diferencia entre las imágenes originales y las reconstruidas')
+# plt.grid()
+# plt.show()
 
 
-#calcular el rango de x
-rango = np.linalg.matrix_rank(X)
-print(f'El rango de la matriz X es: {rango}')
+# #calcular el rango de x
+# rango = np.linalg.matrix_rank(X)
+# # print(f'El rango de la matriz X es: {rango}')

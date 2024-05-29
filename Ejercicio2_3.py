@@ -13,34 +13,43 @@ matriz de similaridad para visualizar todas las similaridades par-a-par juntas."
 
 #importamos la matriz de imagenes del ejercicio 2_1
 from Ejercicio2_1 import X
-from Ejercicio2_1 import X_k
+from Ejercicio2_1 import mat_simil_x
 
+#calculamos 3 X_k
+X_10 = fa.compresion(X,10)
+X_5 = fa.compresion(X,5)
+X_1 = fa.compresion(X,1)
 
-#matriz_similaridad = fa.similaridad_entre_pares_de_imagenes(X)
-#graficar la matriz de similaridad
-# plt.figure()
-# plt.imshow(matriz_similaridad[:, :, 0], cmap='hot')
-# plt.colorbar()
-# plt.title('Similaridad entre pares de imágenes')
-# plt.xticks(np.arange(0, 19, step=1))
-# plt.yticks(np.arange(0, 19, step=1))
-# plt.show()# Crear una figura
+mat_simil_10 = fa.matriz_de_similitud(X_10,1000) 
+mat_simil_5 = fa.matriz_de_similitud(X_5,1000) 
+mat_simil_1 = fa.matriz_de_similitud(X_1,1000) 
 
+fig, axes = plt.subplots(1, 4, figsize=(20, 6))
+im1 = axes[0].imshow(mat_simil_10, cmap='viridis')
+axes[0].set_title('Matriz de Similitud 10')
+axes[0].set_xlabel('Índice')
+axes[0].set_ylabel('Índice')
+fig.colorbar(im1, ax=axes[0])
 
-fig, axs = plt.subplots(3, 6, figsize=(15, 10))
+# Graficar mat_simil_5
+im2 = axes[1].imshow(mat_simil_5, cmap='viridis')
+axes[1].set_title('Matriz de Similitud 5')
+axes[1].set_xlabel('Índice')
+axes[1].set_ylabel('Índice')
+fig.colorbar(im2, ax=axes[1])
 
-# Iterar sobre los valores de k de 2 a 19
-for k in range(2, 20):
-    matriz_similaridad = fa.similaridad_entre_pares_de_imagenes(X)[:, :, k]
+# Graficar mat_simil_1
+im3 = axes[2].imshow(mat_simil_1, cmap='viridis')
+axes[2].set_title('Matriz de Similitud 1')
+axes[2].set_xlabel('Índice')
+axes[2].set_ylabel('Índice')
+fig.colorbar(im3, ax=axes[2])
 
-    # Graficar la matriz de similaridad en un subplot
-    ax = axs[(k-2)//6, (k-2)%6]
-    im = ax.imshow(matriz_similaridad, cmap='hot')
-    ax.set_title(f'Similaridad para k={k}')
+im4 = axes[3].imshow(mat_simil_x,cmap='viridis')
+axes[3].set_title('Matriz de Similitud X')
+axes[3].set_xlabel('Índice')
+axes[3].set_ylabel('Índice')
+fig.colorbar(im4, ax=axes[3])
 
-cbar_ax = fig.add_axes([0.92, 0.15, 0.02, 0.7])
-fig.colorbar(im, cax=cbar_ax)
-
-
-# Mostrar la figura
+plt.tight_layout()
 plt.show()
