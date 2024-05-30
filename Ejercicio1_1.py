@@ -19,16 +19,23 @@ Z_2 = fa.PCA(X, 2)
 
 #TODO descomentar
 # #Graficamos los componentes principales de X_2
-plt.figure()
-plt.scatter(Z_2[:, 0], Z_2[:, 1])
-plt.title('Componentes principales de X_2')
+Y = np.loadtxt('y.txt', delimiter=',')
+plt.scatter(Z[:, 0], Z[:, 1], c=Y)
+plt.xlabel('Componente principal 1')
+plt.ylabel('Componente principal 2')
+plt.title('Datos proyectados')
 plt.show()
+
+# plt.figure()
+# plt.scatter(Z_2[:, 0], Z_2[:, 1])
+# plt.title('Componentes principales de X_2')
+# plt.show()
 
 Z_6 = fa.PCA(X, 6)
 Z_10 = fa.PCA(X, 10)
 
-# #hacer las matrices de similaridad del PCA
-# #TODO descomentar
+#hacer las matrices de similaridad del PCA
+#TODO descomentar
 W_PCA = fa.matriz_de_similitud(Z, 10)
 W_PCA_2 = fa.matriz_de_similitud(Z_2, 10)
 W_PCA_6 = fa.matriz_de_similitud(Z_6, 10)

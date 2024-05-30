@@ -141,6 +141,20 @@ def error_de_aproximacion(X_modificada,X_original):
         error: error de aproximación entre X_modificada y X_original
     """
     return np.linalg.norm(X_modificada - X_original)
+#_____________________________________________________________________________________
+#Ejercicio 1.3
+def error_de_prediccion(X, Y, beta):
+    """
+    Calcula el error de predicción entre X*beta e Y
+    Recibe:
+        X: matriz de datos de dimensión m x n
+        Y: vector de etiquetas de dimensión m
+        beta: vector de coeficientes de dimensión n
+    Devuelve:
+        error: error de predicción entre X*beta e Y
+    """
+    return np.linalg.norm(np.dot(X, beta) - Y)
+
 #_____________________________________________________________________________________-
 #Ejercicio 2
 def cargar_y_transformar_imagen(ruta, p):
