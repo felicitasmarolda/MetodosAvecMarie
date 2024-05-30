@@ -179,3 +179,10 @@ def compresion(X, k):
 
 def norma_de_Frobenius(X):
     return np.linalg.norm(X, 'fro')
+
+def obtener_matriz_de_proyeccion(X,k):
+    X_norm = normalizar(X)
+    C = matriz_de_covarianza(X_norm)
+    U, S, Vt = np.linalg.svd(C)
+    U_k, S_k, Vt_k = calcular_X_k(U, S, Vt, k)
+    return Vt_k
