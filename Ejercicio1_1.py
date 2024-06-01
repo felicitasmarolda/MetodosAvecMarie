@@ -74,6 +74,7 @@ plt.show()
 
 #graficar los valores singulares de X en grafico de barras
 plt.figure()
+U, S, Vt = np.linalg.svd(X, full_matrices=False)
 plt.bar(range(1, len(S) + 1), S)
 plt.title('Valores singulares de X')
 plt.xlabel('Número de valor singular')
@@ -83,3 +84,5 @@ plt.show()
 
 #FALTA
  # probar porque elegimos el valor de sigma
+
+ # agarramos de las d dimanesiones mas importantes agarramos sus autovetores (lo que vienen de los valore ssingulares) y nos fijamos el numero mas grande de todos, nos fijamos en que posicion de su vector esta y esa posicion va a ser la dimension que mass dice
