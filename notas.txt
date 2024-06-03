@@ -53,3 +53,21 @@ Para verificar esto, puedes calcular la varianza explicada acumulada y observar 
 𝑘
 k. Si la varianza explicada se estabiliza después de cierto punto, es una indicación de que los componentes adicionales no están aportando nueva información.
 
+
+
+Hay varias posibles explicaciones para este comportamiento aparentemente contradictorio:
+
+Inestabilidad numérica: Los cálculos de la descomposición de valores singulares (SVD) y la pseudoinversa pueden ser sensibles a la presencia de valores singulares pequeños o cercanos a cero. Incluso pequeños errores de redondeo pueden causar inestabilidades cuando se trabaja con matrices mal condicionadas.
+Multicolinealidad: Si las variables predictoras están altamente correlacionadas entre sí (multicolinealidad), agregar más dimensiones puede no mejorar significativamente el ajuste del modelo y podría incluso empeorar el rendimiento debido al sobreajuste.
+No linealidad: Si la relación subyacente entre las variables predictoras y la variable de respuesta no es lineal, un modelo lineal puede no ser capaz de capturar adecuadamente la estructura de los datos, independientemente del número de dimensiones.
+Datos atípicos o ruido: La presencia de datos atípicos o ruido en los datos puede afectar la estimación de los coeficientes del modelo y, por lo tanto, el error de predicción.
+
+Para comprender mejor este comportamiento, puede ser útil realizar un análisis más detallado de los datos y el modelo. Algunas sugerencias:
+
+Examinar los valores singulares y las condiciones de la matriz para detectar posibles problemas de inestabilidad numérica.
+Calcular e inspeccionar las correlaciones entre las variables predictoras para detectar multicolinealidad.
+Explorar transformaciones no lineales de las variables predictoras o utilizar modelos no lineales si se sospecha que la relación no es lineal.
+Aplicar técnicas de detección y tratamiento de datos atípicos o realizar un proceso de limpieza de datos más exhaustivo.
+Utilizar técnicas de validación cruzada o conjuntos de datos de prueba separados para evaluar de manera más confiable el error de predicción y evitar el sobreajuste.
+
+En resumen, aunque es inusual, este comportamiento puede ocurrir debido a varios factores, y un análisis más profundo de los datos y el modelo puede ayudar a identificar la causa raíz y encontrar una solución adecuada.

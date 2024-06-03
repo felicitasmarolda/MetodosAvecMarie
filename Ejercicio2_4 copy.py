@@ -38,74 +38,65 @@ plt.figure()
 plt.bar(range(1, 9), S[:8])
 plt.title('Valores singulares de X')
 plt.show()
+# Calcular la norma de Frobenius de la matriz original
+fro_norm_original = np.linalg.norm(X_dataset2, 'fro')
 
-def calcular_error_por_imagen():
-    error_por_imagen = []
-    for i in range(1, 9):
-        imagen = []
-        for j in range(1, 9):
-            # Reducir a d dimensiones
-            S_d = np.zeros((U.shape[0], Vt.shape[0]))
-            np.fill_diagonal(S_d[:i, :i], S[:i])
-            X_d = np.dot(U, np.dot(S_d, Vt))
+# Encontrar el número mínimo de dimensiones d
+fro_norms = []
+for d in range(1, len(S) + 1):
+    S_d = np.diag(S[:d])
+    U_d = U[:, :d]
+    Vt_d = Vt[:d, :]
+    X_d = np.dot(U_d, np.dot(S_d, Vt_d))
+    fro_norm_d = np.linalg.norm(X_dataset2 - X_d, 'fro')
+    fro_norms.append(fro_norm_d)
+    if fro_norm_d / fro_norm_original <= 0.1:
+        d_min = d
+        break
 
-            # Calcular el error de reconstrucción para cada imagen
-            errores = np.linalg.norm(X_dataset2 - X_d, axis=1) / np.linalg.norm(X_dataset2, axis=1)
-            imagen.append(errores[j-1])
-        error_por_imagen.append(imagen)
-    return error_por_imagen
+print(f"El número mínimo de dimensiones d es: {d_min}")
 
-# Crear una nueva figura
+# Graficar el error de reconstrucción
 plt.figure()
-
-error_por_imagen = calcular_error_por_imagen()
-
-# Generar una función para cada imagen
-for i in range(8):
-    # Extraer los errores de la imagen i
-    errores_imagen_i = [error_por_imagen[j][i] for j in range(8)]
-    
-    # Graficar los errores de la imagen i
-    plt.plot(range(1, 9), errores_imagen_i, label=f'Imagen {i+1}')
-
+plt.plot(range(1, len(S) + 1), [fn / fro_norm_original for fn in fro_norms], marker='o')
 plt.axhline(y=0.1, color='r', linestyle='--')
-
-
-# Añadir una leyenda
-plt.legend()
-
-# Añadir títulos a los ejes y a la figura
-plt.xlabel('Dimensiones')
-plt.ylabel('Error de reconstrucción')
-plt.title('Error de reconstrucción por número de dimensiones')
-
-# Mostrar el gráfico
+plt.xlabel('Número de dimensiones d')
+plt.ylabel('Error de reconstrucción relativo')
+plt.title('Error de reconstrucción en función del número de dimensiones')
 plt.show()
 
-#calculo para imagen la dimensión a partir de la cual el error es menor o igual a 0.1
-dimensiones_minimas_por_imagen = []
-for i in range(len(error_por_imagen)):
-    for j in range(len(error_por_imagen[i])):
-        if error_por_imagen[j][i] <= 0.1:  # Corrección aquí
-            dimensiones_minimas_por_imagen.append(j+1)
-            break
+# Graficar los errores para las diferentes dimensiones en cada imagen
+errors_per_image = []
+for img_idx in range(X_dataset2.shape[0]):
+    errors_img = []
+    for d in range(1, len(S) + 1):
+        S_d = np.diag(S[:d])
+        U_d = U[:, :d]
+        Vt_d = Vt[:d, :]
+        X_d = np.dot(U_d, np.dot(S_d, Vt_d))
+        fro_norm_d_img = np.linalg.norm(X_dataset2[img_idx] - X_d[img_idx])
+        errors_img.append(fro_norm_d_img / np.linalg.norm(X_dataset2[img_idx]))
+    errors_per_image.append(errors_img)
 
-print(dimensiones_minimas_por_imagen)
-
-# debido a que debemos encontrar la menor dimension que haga que los errores de todas las imagenes sea menor al 10%, tomamos el maximo de las dimensiones minimas por imagen    
-dimension_minima = max(dimensiones_minimas_por_imagen)   
-
-#nos quedo d = 5
+# Graficar el error de reconstrucción para cada imagen
+plt.figure()
+for i, errors in enumerate(errors_per_image):
+    plt.plot(range(1, len(S) + 1), errors, label=f'Imagen {i+1}')
+plt.xlabel('Número de dimensiones d')
+plt.ylabel('Error de reconstrucción relativo')
+plt.title('Error de reconstrucción por imagen en función del número de dimensiones')
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.show()
 
 #Segunda parte del ejercicio
 """Utilizando esta ultima representación aprendida con el dataset 2 ¿Qué error de reconstrucción 
 obtienen si utilizan la misma compresión (con la misma base de d dimensiones obtenida del dataset 2)
 para las imagenes dataset_imagenes1.zip?"""
 
+
 #funcion para obtener la matriz utilizada para reducir dimensión en PCA
 #obtenemos el V_5 utilizado para la compresión con SVD del dataset_2
-dimension_maxima = min(dimensiones_minimas_por_imagen)
-Vt_8 = fa.obtener_matriz_de_proyeccion(X_dataset2, dimension_maxima)
+Vt_8 = fa.obtener_matriz_de_proyeccion(X_dataset2, d_min)
 
 #Cargar las imágenes del dataset 1
 from Ejercicio2_1 import X as X_dataset1
@@ -117,3 +108,12 @@ X_dataset1_reducido = np.dot(np.dot(X_dataset1, Vt_8.T),Vt_8)
 error_de_reconstruccion_dataset1 = fa.norma_de_Frobenius(X_dataset1 - np.dot(X_dataset1_reducido, Vt_8))/fa.norma_de_Frobenius(X_dataset1)
 
 print(f"El error de reconstrucción para las imágenes del dataset 1 utilizando la compresión con d=5 del dataset 2 es: {error_de_reconstruccion_dataset1}")
+
+#graficamos las imágenes con dimension reducida del dataset 1
+plt.figure()
+for i in range(8):
+    plt.subplot(2, 4, i+1)
+    plt.imshow(X_dataset1_reducido[i].reshape(p, p), cmap='gray')
+    plt.axis('off')
+plt.suptitle('Imágenes reconstruidas con d=5 del dataset 1')
+plt.show()

@@ -14,41 +14,46 @@ error de predicción. Usando PCA, que dimensión d mejora la predicción? Cuales
 mejor predicción con el mejor modelo? Resolviendo el problema de cuadrados mínimos en el espacio
 original X, que peso se le asigna a cada dimensión original si observamos el vector β?"""
 
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+import funciones_auxiliares as fa
 
-#Cargar los datos
+# Cargar los datos
 from Ejercicio1_1 import X
 from Ejercicio1_1 import Y
 
-#centramos y 
+# Centrar Y
 Y = Y - np.mean(Y)
 
-#Hacer SVD de X
+# Hacer SVD de X
 U, S, Vt = np.linalg.svd(X, full_matrices=False)
 
 # Hacemos PCA para distintas dimensiones d
-X_k_list  = []
-for i in range(1, min(X.shape)+1):
-    X_k = fa.calcular_X_k(U, S, Vt, i)
-    X_k_list.append(X_k)
-
-X_k_pseudoinversa_list = []
-for X_k in X_k_list:
-    #Hacer SVD de X_k
-    U, S, Vt = np.linalg.svd(X_k, full_matrices=False)
-    #multiplico V por S(inveras) por UT 
-    x_k_pseudoinversa = np.dot(np.dot(Vt.T, np.diag(1/S)), U.T)
-    X_k_pseudoinversa_list.append(x_k_pseudoinversa)
-
-
+# Hacemos PCA para distintas dimensiones d
 x_k_errores_beta = []
-for i in range(len(X_k_list)):
-    X_k = X_k_list[i]
-    x_k_pseudoinversa = X_k_pseudoinversa_list[i]
-    # multiplico la pseudoinversa por Y para calcular beta, luego calculo el error de predicción usando la norma de frobenius
+for i in range(1, min(X.shape)+1):
+    # Calcular X_k
+    X_k = fa.PCA(X, i)
+    
+
+    # Hacer SVD de X_k
+    U_k, S_k, Vt_k = np.linalg.svd(X_k, full_matrices=False)
+    
+    # Multiplicar V por S(inversa) por U.T
+
+    #Calcular la inversa de S_k, si el autovalor es 0, la diagonal en esa posición es 0
+    S_k_inv = np.diag(np.where(S_k != 0, 1/S_k, 0))
+
+    temp = np.dot(Vt_k.T, S_k_inv)
+    x_k_pseudoinversa = np.dot(temp, U_k.T)
+    
+    # Multiplicar la pseudoinversa por Y para calcular beta
     beta = np.dot(x_k_pseudoinversa, Y)
-    error = fa.norma_de_Frobenius(np.dot(X_k, beta) - Y)
+    
+    # Calcular el error de predicción usando la norma de Frobenius
+    error = np.linalg.norm((np.dot(X_k, beta) - Y))
     x_k_errores_beta.append(error)
- 
 
 # Graficar los errores de predicción para diferentes dimensiones
 plt.plot(range(1, min(X.shape)+1), x_k_errores_beta)
@@ -57,6 +62,32 @@ plt.ylabel('Error de predicción')
 plt.title('Error de predicción vs Dimensión d')
 plt.grid(True)
 plt.show()
+
+# Graficamos el hiperplano
+# Calcular el hiperplano
+X_k = fa.PCA(X, 2)
+U_k, S_k, Vt_k = np.linalg.svd(X_k, full_matrices=False)
+S_k_inv = np.diag(np.where(S_k != 0, 1/S_k, 0))
+temp = np.dot(Vt_k.T, S_k_inv)
+x_k_pseudoinversa = np.dot(temp, U_k.T)
+beta = np.dot(x_k_pseudoinversa, Y)
+
+# Graficar en la coordenada x el pirmer componente principal y en la coordenada y el segundo componente principal y el la z el valor de Y
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(X_k[:, 0], X_k[:, 1], Y, c=Y)
+# grafique el hiperplano beta
+x = np.linspace(-5, 5, 100)
+y = np.linspace(-5, 5, 100)
+x, y = np.meshgrid(x, y)
+z = beta[0]*x + beta[1]*y
+ax.plot_surface(x, y, z, alpha=0.3)
+ax.set_xlabel('Componente principal 1')
+ax.set_ylabel('Componente principal 2')
+ax.set_zlabel('etiqueta Y')
+plt.title('Datos proyectados en 3D')
+plt.show()
+
 
 
 # #multiplicamos V por S(inveras) por UT por Y
