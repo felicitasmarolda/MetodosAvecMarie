@@ -87,10 +87,10 @@ def main():
     #graficar los valores singulares de X en grafico de barras
     plt.figure()
     U, S, Vt = np.linalg.svd(X, full_matrices=False)
-    plt.bar(range(1, len(S) + 1), np.sqrt(S))  # Modificado para graficar las raíces cuadradas de los elementos de la diagonal de S
-    plt.title('Raíces cuadradas de los valores singulares de X')  # Modificado para reflejar el cambio en el título
-    plt.xlabel('Número de valor singular')
-    plt.ylabel('Raíz cuadrada del valor singular')  # Modificado para reflejar el cambio en la etiqueta del eje y
+    plt.bar(range(1, len(S) + 1), np.sqrt(S), color='hotpink')  # Modificado para graficar las raíces cuadradas de los elementos de la diagonal de S y con color hot pink
+    plt.title('Valores singulares de X')  # Modificado para reflejar el cambio en el título
+    plt.xlabel('Fila del valor singular')
+    plt.ylabel('Valores singulares de X')  # Modificado para reflejar el cambio en la etiqueta del eje y
     plt.show()
 
     #FALTA
