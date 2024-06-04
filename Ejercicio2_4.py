@@ -95,7 +95,7 @@ print(dimensiones_minimas_por_imagen)
 # debido a que debemos encontrar la menor dimension que haga que los errores de todas las imagenes sea menor al 10%, tomamos el maximo de las dimensiones minimas por imagen    
 dimension_minima = max(dimensiones_minimas_por_imagen)   
 
-#nos quedo d = 5
+#nos quedo d = 8
 
 #Segunda parte del ejercicio
 """Utilizando esta ultima representación aprendida con el dataset 2 ¿Qué error de reconstrucción 
@@ -104,16 +104,28 @@ para las imagenes dataset_imagenes1.zip?"""
 
 #funcion para obtener la matriz utilizada para reducir dimensión en PCA
 #obtenemos el V_5 utilizado para la compresión con SVD del dataset_2
-dimension_maxima = min(dimensiones_minimas_por_imagen)
-Vt_8 = fa.obtener_matriz_de_proyeccion(X_dataset2, dimension_maxima)
+dimension_maxima = max(dimensiones_minimas_por_imagen)
+# Vt_8 = fa.obtener_matriz_de_proyeccion(X_dataset2, dimension_maxima)
 
 #Cargar las imágenes del dataset 1
 from Ejercicio2_1 import X as X_dataset1
-
+# Vt_8_red = Vt_8[:8,:]
+# print(Vt_8_red.shape)
 #Reducir la dimensionalidad de las imágenes del dataset 1 con V_5
-X_dataset1_reducido = np.dot(np.dot(X_dataset1, Vt_8.T),Vt_8)
+U,S,Vt = np.linalg.svd(X_dataset2)
+Vt_8 = Vt[:8,:]
+X_dataset1_reducido = X_dataset1 @ (Vt_8.T @ Vt_8)
 
 #Calcular el error de reconstrucción CON la norma de FROBENIUS
-error_de_reconstruccion_dataset1 = fa.norma_de_Frobenius(X_dataset1 - np.dot(X_dataset1_reducido, Vt_8))/fa.norma_de_Frobenius(X_dataset1)
+error_de_reconstruccion_dataset1 = np.linalg.norm(X_dataset1 - X_dataset1_reducido) / np.linalg.norm(X_dataset1)
 
-print(f"El error de reconstrucción para las imágenes del dataset 1 utilizando la compresión con d=5 del dataset 2 es: {error_de_reconstruccion_dataset1}")
+print(f"El error de reconstrucción para las imágenes del dataset 1 utilizando la compresión con d=8 del dataset 2 es: {error_de_reconstruccion_dataset1}")
+
+#graficamos como quedan los datos del dataset 1 (X_dataset1_reducido)
+plt.figure()
+for i in range(8):
+    plt.subplot(2, 4, i+1)
+    plt.imshow(X_dataset1_reducido[i].reshape(p, p), cmap='gray')
+    plt.axis('off')
+# plt.suptitle('Imágenes reducidas')
+plt.show()
