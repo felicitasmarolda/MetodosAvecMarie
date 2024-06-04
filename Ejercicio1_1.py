@@ -38,11 +38,6 @@ def main():
     plt.title('Datos proyectados en 3D')
     plt.show()
 
-    plt.figure()
-    plt.scatter(Z_2[:, 0], Z_2[:, 1])
-    plt.title('Componentes principales de X_2')
-    plt.show()
-
 
     # Proyectar x en el plano xz
     plt.figure()
@@ -107,8 +102,12 @@ def main():
     U, S, Vt = np.linalg.svd(X, full_matrices=False)
     plt.bar(range(1, len(S) + 1), np.sqrt(S), color='hotpink')  # Modificado para graficar las raíces cuadradas de los elementos de la diagonal de S y con color hot pink
     plt.title('Valores singulares de X')  # Modificado para reflejar el cambio en el título
-    plt.xlabel('Fila del valor singular')
+    plt.xlabel('Numero de valor singular según su fila en S')
     plt.ylabel('Valores singulares de X')  # Modificado para reflejar el cambio en la etiqueta del eje y
+    
+    # Pintar los dos primeros valores singulares de color celeste
+    plt.bar(range(1, 3), np.sqrt(S[:2]), color='blue')
+    
     plt.show()
 
     #FALTA
