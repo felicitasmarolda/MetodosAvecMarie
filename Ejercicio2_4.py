@@ -27,17 +27,17 @@ for i, f in enumerate(img_files):
 # plt.figure()
 # for i in range(8):
 #     plt.subplot(2, 4, i+1)
-#     plt.imshow(X[i].reshape(p, p), cmap='gray')
+#     plt.imshow(X_dataset2[i].reshape(p, p), cmap='gray')
 #     plt.axis('off')
-# plt.suptitle('Imágenes originales')
+# # plt.suptitle('Imágenes originales')
 # plt.show()
 
 #Graficar los valores singulares de X
 U, S, Vt = np.linalg.svd(X_dataset2, full_matrices=False)
-plt.figure()
-plt.bar(range(1, 9), S[:8])
-plt.title('Valores singulares de X')
-plt.show()
+# plt.figure()
+# plt.bar(range(1, 9), S[:8])
+# plt.title('Valores singulares de X')
+# plt.show()
 
 def calcular_error_por_imagen():
     error_por_imagen = []
@@ -77,7 +77,7 @@ plt.legend()
 # Añadir títulos a los ejes y a la figura
 plt.xlabel('Dimensiones')
 plt.ylabel('Error de reconstrucción')
-plt.title('Error de reconstrucción por número de dimensiones')
+# plt.title('Error de reconstrucción por número de dimensiones')
 
 # Mostrar el gráfico
 plt.show()
@@ -108,7 +108,7 @@ dimension_maxima = max(dimensiones_minimas_por_imagen)
 # Vt_8 = fa.obtener_matriz_de_proyeccion(X_dataset2, dimension_maxima)
 
 #Cargar las imágenes del dataset 1
-from Ejercicio2_1 import X as X_dataset1
+from Ejercicio2_2 import X as X_dataset1
 # Vt_8_red = Vt_8[:8,:]
 # print(Vt_8_red.shape)
 #Reducir la dimensionalidad de las imágenes del dataset 1 con V_5
