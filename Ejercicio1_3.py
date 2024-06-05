@@ -26,6 +26,7 @@ from Ejercicio1_1 import Y
 # Centrar Y
 Y = Y - np.mean(Y)
 
+
 # Hacer SVD de X
 U, S, Vt = np.linalg.svd(X, full_matrices=False)
 
@@ -51,12 +52,12 @@ for i in range(1, min(X.shape)+1):
     # Multiplicar la pseudoinversa por Y para calcular beta
     beta = np.dot(x_k_pseudoinversa, Y)
     
-    # Calcular el error de predicción usando la norma de Frobenius
+    # Calcular el error de predicción usando la norma 2
     error = np.linalg.norm((np.dot(X_k, beta) - Y))
     x_k_errores_beta.append(error)
 
 # Graficar los errores de predicción para diferentes dimensiones
-plt.plot(range(1, min(X.shape)+1), x_k_errores_beta)
+plt.plot(range(1, min(X.shape)+1), x_k_errores_beta, color='hotpink')
 plt.xlabel('Dimensión d')
 plt.ylabel('Error de predicción')
 plt.title('Error de predicción vs Dimensión d')

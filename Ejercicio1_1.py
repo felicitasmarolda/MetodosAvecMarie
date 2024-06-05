@@ -12,6 +12,18 @@ Y = np.loadtxt('y.txt', delimiter=',')
 def main():
     #HACEMOS PCA
     #TODO descomentar
+
+    # Graficamos la matriz X
+    plt.figure()
+    plt.imshow(X, cmap='hot')
+    plt.title('Matriz X')
+    plt.xlabel('Características')
+    plt.ylabel('Muestras')
+    plt.colorbar(label='Valor')
+    plt.axis('tight')
+    plt.show()
+    
+
     #calculamos los componentes principales de X
     m, n = X.shape
     Z = fa.PCA(X, n)
@@ -114,6 +126,7 @@ def main():
     # probar porque elegimos el valor de sigma
 
     # agarramos de las d dimanesiones mas importantes agarramos sus autovetores (lo que vienen de los valore ssingulares) y nos fijamos el numero mas grande de todos, nos fijamos en que posicion de su vector esta y esa posicion va a ser la dimension que mass dice
+
 
 if __name__ == '__main__':
     main()
