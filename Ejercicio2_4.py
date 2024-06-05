@@ -122,4 +122,9 @@ error_de_reconstruccion_dataset1 = np.linalg.norm(X_dataset1 - X_dataset1_reduci
 print(f"El error de reconstrucción para las imágenes del dataset 1 utilizando la compresión con d=8 del dataset 2 es: {error_de_reconstruccion_dataset1}")
 
 #graficamos como quedan los datos del dataset 1 (X_dataset1_reducido)
-fig, axs = plt.subplot
+fig, axs = plt.subplots(1, 19, figsize = (19,2))
+for i in range(19):
+    vector = X_dataset1_reducido[i].reshape(28,28)
+    axs[i].imshow(vector, cmap='gray')
+    axs[i].axis('off')
+plt.show()
