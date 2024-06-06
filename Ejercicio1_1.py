@@ -4,16 +4,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import funciones_auxiliares as fa
 
-#Cargar el dataset X desde el archivo dataset.csv. en la carpeta dataset
 X = np.loadtxt('dataset.csv', delimiter=',', skiprows=1)
 X = X[:, 1:]
 Y = np.loadtxt('y.txt', delimiter=',')
 
 def main():
-    #HACEMOS PCA
-    #TODO descomentar
-
-    # Graficamos la matriz X
     plt.figure()
     plt.imshow(X, cmap='magma')
     plt.title('Matriz X')
@@ -23,23 +18,17 @@ def main():
     plt.axis('tight')
     plt.show()
     
-
-    #calculamos los componentes principales de X
     m, n = X.shape
     Z = fa.PCA(X, n)
 
-    # calculamos los componentes principales de X_2
     Z_2 = fa.PCA(X, 2)
 
-    #TODO descomentar
-    # #Graficamos los componentes principales de X_2
     plt.scatter(Z[:, 0], Z[:, 1], c=Y)
     plt.xlabel('Componente principal 1')
     plt.ylabel('Componente principal 2')
     plt.title('Datos proyectados')
     plt.show()
 
-    #Graficar X con dimension reducida 3 como un gráfico en 3D
     X_3 = fa.PCA(X, 3)
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
@@ -50,8 +39,6 @@ def main():
     plt.title('Datos proyectados en 3D')
     plt.show()
 
-
-    # Proyectar x en el plano xz
     plt.figure()
     plt.scatter(X_3[:, 0], X_3[:, 2], c=Y)
     plt.xlabel('Componente principal 1')
@@ -59,7 +46,6 @@ def main():
     plt.title('Datos proyectados en el plano xz')
     plt.show()
 
-    # Proyectar x en el plano yz
     plt.figure()
     plt.scatter(X_3[:, 1], X_3[:, 2], c=Y)
     plt.xlabel('Componente principal 2')
