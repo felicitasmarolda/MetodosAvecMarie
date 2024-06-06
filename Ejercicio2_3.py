@@ -6,23 +6,29 @@ import funciones_auxiliares as fa
 
 from Ejercicio2_2 import X
 
+# Comprimo las imágenes a diferentes dimensiones
 X_15 = fa.compresion(X,15)
 X_10 = fa.compresion(X,10)
 X_5 = fa.compresion(X,5)
 X_1 = fa.compresion(X,1)
 
+# Defino el valor de sigma para la matriz de similitud
 sigma = 800
+
+# Calculo la matriz de similitud para las imágenes originales y las comprimidas
 max_simil_X = fa.matriz_de_similitud(X,sigma)
 mat_simil_15 = fa.matriz_de_similitud(X_15,sigma)
 mat_simil_10 = fa.matriz_de_similitud(X_10,sigma) 
 mat_simil_5 = fa.matriz_de_similitud(X_5,sigma) 
 mat_simil_1 = fa.matriz_de_similitud(X_1,sigma) 
 
+# Muestro la matriz de similitud para las imágenes comprimidas a una dimensión
 fig1, ax1 = plt.subplots(figsize=(6, 4))
 im3 = ax1.imshow(mat_simil_1, cmap='viridis')
 fig1.colorbar(im3, ax=ax1)
 plt.show()
 
+# Muestro las matrices de similitud para las imágenes comprimidas a diferentes dimensiones y las originales
 fig2, axes = plt.subplots(1, 4, figsize=(26, 6))
 
 im2 = axes[0].imshow(mat_simil_5, cmap='viridis')
@@ -41,7 +47,7 @@ im4 = axes[3].imshow(max_simil_X,cmap='viridis')
 axes[3].set_title('X original')
 fig2.colorbar(im4, ax=axes[3])
 
-
+# Ajusto los ticks de los ejes para todas las gráficas
 for ax in axes:
     ax.set_xticks(range(0, len(mat_simil_10), 5))
     ax.set_yticks(range(0, len(mat_simil_10), 5))
@@ -49,6 +55,7 @@ for ax in axes:
 plt.tight_layout(pad=5.0)
 plt.show()
 
+# Muestro algunas imágenes originales y comprimidas
 plt.figure()
 
 plt.subplot(2, 2, 1)
