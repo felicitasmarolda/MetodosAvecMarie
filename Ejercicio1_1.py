@@ -15,9 +15,9 @@ def main():
 
     # Graficamos la matriz X
     plt.figure()
-    plt.imshow(X, cmap='hot')
+    plt.imshow(X, cmap='magma')
     plt.title('Matriz X')
-    plt.xlabel('Características')
+    plt.xlabel('Features')
     plt.ylabel('Muestras')
     plt.colorbar(label='Valor')
     plt.axis('tight')
@@ -112,13 +112,13 @@ def main():
     #graficar los valores singulares de X en grafico de barras
     plt.figure()
     U, S, Vt = np.linalg.svd(X, full_matrices=False)
-    plt.bar(range(1, len(S) + 1), np.sqrt(S), color='hotpink')  # Modificado para graficar las raíces cuadradas de los elementos de la diagonal de S y con color hot pink
+    plt.bar(range(1, len(S) + 1), S, color='hotpink')  # Modificado para graficar las raíces cuadradas de los elementos de la diagonal de S y con color hot pink
     plt.title('Valores singulares de X')  # Modificado para reflejar el cambio en el título
     plt.xlabel('Numero de valor singular según su fila en S')
     plt.ylabel('Valores singulares de X')  # Modificado para reflejar el cambio en la etiqueta del eje y
     
     # Pintar los dos primeros valores singulares de color celeste
-    plt.bar(range(1, 3), np.sqrt(S[:2]), color='blue')
+    plt.bar(range(1, 3), S[:2], color='blue')
     
     plt.show()
 
