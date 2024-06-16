@@ -91,3 +91,4 @@ x_svd = Vt.T @ S_inv @ U.T @ b
 error_svd = np.linalg.norm(A @ x_svd - b)
 print("Error de A*x-b con SVD: ", error_svd)
 
+#graficamos las curvas de isocosto
