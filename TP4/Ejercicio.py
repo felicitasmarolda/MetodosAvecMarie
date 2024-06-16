@@ -76,7 +76,7 @@ plt.plot(range(cant_iteraciones), costos_f2, label='F2', color='hotpink')
 plt.xlabel('Iteraciones')
 plt.ylabel('Costo')
 plt.legend()
-#plt.show()
+plt.show()
 
 # Resolvemos el problema mediante SVD -----------------------------------
 U, S, Vt = np.linalg.svd(A)
@@ -103,7 +103,7 @@ axs[1].bar(["Descenso de gradiente con regularización"], [error_2], color=['hot
 axs[1].set_ylabel('Error')
 
 plt.tight_layout()  # Ajustar el layout para que no se superpongan los gráficos
-# plt.show()
+plt.show()
 
 
 # Le agregamos ruido a la matriz A y probamos las soluciones obtenidas con ruido N=1000 veces y calculamos el error promedio de cada solución
@@ -145,4 +145,3 @@ error_avg_SVD /= N
 print("Error promedio de A*x-b con ruido en F1: ", error_avg_F1)
 print("Error promedio de A*x-b con ruido en F2: ", error_avg_F2)
 print("Error promedio de A*x-b con ruido en SVD: ", error_avg_SVD)
-
