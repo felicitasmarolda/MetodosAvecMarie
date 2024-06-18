@@ -14,9 +14,9 @@ delta = (10**-2) * max(sigma)
 # Calculamos el Hessiano de F1
 H = 2 * A.T @ A + 2 * delta * np.eye(d)
 # Calculamos los autovalores de H
-lamda_ = np.linalg.eig(H)[0]
+lamda_ = 2*np.max(np.linalg.svd(A)[1])**2
 # Definimos s 
-s = 1 / max(lamda_) if max(lamda_) > 0 else 1
+s = 1 / lamda_
 
 # Definimos la función de costo F2 (se le agrega un término de regularización)
 def F1(x, A, b):
@@ -184,8 +184,8 @@ plt.show()
 # calculamos el error relativo de la solucion con SVD como la solucion de verdad y la solucion obtenida con el descenso de gradiente contra las iteraciones
 # Calculamos el error relativo de la solucion con SVD
 def error_relativo(x, x_svd):
-    return abs(np.linalg.norm(x - x_svd) / np.linalg.norm(x_svd))
-    
+    return np.linalg.norm(x - x_svd) / np.linalg.norm(x_svd)
+
 #graficamos el error relativo para cada iteracion con x y x_2
 error_relativo_x_values1 = [error_relativo(x, x_svd) for x in x_values1]
 error_relativo_x_values2 = [error_relativo(x, x_svd) for x in x_values2]
