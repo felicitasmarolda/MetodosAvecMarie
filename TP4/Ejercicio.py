@@ -12,7 +12,7 @@ sigma = np.linalg.svd(A)[1]
 delta = (10**-2) * max(sigma)
 
 # Calculamos el Hessiano de F1
-H = 2 * A.T @ A + 2 * delta * np.eye(d)
+H = 2 * A.T @ A
 # Calculamos los autovalores de H
 lamda_ = 2*np.max(np.linalg.svd(A)[1])**2
 # Definimos s 
@@ -147,7 +147,7 @@ for delta in deltas:
     plt.plot(range(cant_iteraciones), costos_f2, label=f'delta = {delta}')
 
 plt.xlabel('Iteraciones')
-plt.ylabel('Costo')
+plt.ylabel('Valor de F1')
 plt.legend()
 plt.yscale('log')
 plt.show()
