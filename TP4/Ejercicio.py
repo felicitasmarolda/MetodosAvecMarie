@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+np.random.seed(123)
+
 n = 5
 d = 100
 
