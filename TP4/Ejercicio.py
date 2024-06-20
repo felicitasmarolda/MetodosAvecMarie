@@ -174,9 +174,11 @@ plt.show()
 #graficamos para x y x_2 en cada iteracion
 normas_x = [np.linalg.norm(x) for x in x_values1]
 normas_x_2 = [np.linalg.norm(x) for x in x_values2]
+norma_x_svd = np.linalg.norm(x_svd)
 
 plt.plot(range(cant_iteraciones+1), normas_x, label='norma de x obtenidas con F1', color='mediumorchid')
 plt.plot(range(cant_iteraciones+1), normas_x_2, label='norma de x obtenida con F2', color='hotpink')
+plt.axhline(y=norma_x_svd, color='green', label='norma de x obtenida con SVD')
 plt.xlabel('Iteraciones')
 plt.ylabel('Norma de x')
 plt.legend()
